@@ -99,6 +99,7 @@
       <button id="addButton">添加</button>
       <button id="sortButton">排序</button>
       <button id="completeAllButton">全部完成</button>
+      <button id="clearCompletedButton">清空已完成</button>
     </div>
 
     <ul id="todoList"></ul>
@@ -112,6 +113,7 @@
 
     const dueInput = document.getElementById("dueInput");
     const completeAllButton = document.getElementById("completeAllButton");
+    const clearCompletedButton = document.getElementById("clearCompletedButton");
 
     const todos = [
       { text: "关注「马克的技术工作坊」", completed: false },
@@ -125,6 +127,15 @@
 
       const today = new Date().toISOString().slice(0, 10);
       return todo.due < today;
+    }
+
+    function clearCompleted() {
+      const remaining = todos.filter(todo => !todo.completed);
+
+      todos.length = 0;
+      todos.push(...remaining);
+
+      renderTodos();
     }
 
     function completeAll() {
@@ -226,6 +237,7 @@
     sortButton.addEventListener("click", sortByDue);
 
     completeAllButton.addEventListener("click", completeAll);
+    clearCompletedButton.addEventListener("click", clearCompleted);
     todoInput.addEventListener("keydown", event => {
       if (event.key === "Enter") {
         addTodo();
