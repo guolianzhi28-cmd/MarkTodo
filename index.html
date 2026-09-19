@@ -116,6 +116,14 @@
       return todo.due < today;
     }
 
+    function completeAll() {
+      todos.forEach(todo => {
+        todo.completed = true;
+      });
+
+      renderTodos();
+    }
+
     function renderTodos() {
       todoList.innerHTML = "";
 
