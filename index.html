@@ -163,6 +163,22 @@
       });
     }
 
+    function sortByDue() {
+      todos.sort((a, b) => {
+        if (!a.due) {
+          return 1;
+        }
+
+        if (!b.due) {
+          return -1;
+        }
+
+        return a.due < b.due ? -1 : 1;
+      });
+
+      renderTodos();
+    }
+
     function addTodo() {
       const text = todoInput.value.trim();
 
@@ -182,6 +198,7 @@
     }
 
     addButton.addEventListener("click", addTodo);
+    sortButton.addEventListener("click", sortByDue);
 
     todoInput.addEventListener("keydown", event => {
       if (event.key === "Enter") {
