@@ -89,6 +89,7 @@
       <input id="dueInput" type="date">
       <button id="addButton">添加</button>
       <button id="sortButton">排序</button>
+      <button id="completeAllButton">全部完成</button>
     </div>
 
     <ul id="todoList"></ul>
@@ -101,6 +102,7 @@
     const sortButton = document.getElementById("sortButton");
 
     const dueInput = document.getElementById("dueInput");
+    const completeAllButton = document.getElementById("completeAllButton");
 
     const todos = [
       { text: "关注「马克的技术工作坊」", completed: false },
@@ -213,6 +215,7 @@
     addButton.addEventListener("click", addTodo);
     sortButton.addEventListener("click", sortByDue);
 
+    completeAllButton.addEventListener("click", completeAll);
     todoInput.addEventListener("keydown", event => {
       if (event.key === "Enter") {
         addTodo();
