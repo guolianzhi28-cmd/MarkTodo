@@ -125,6 +125,15 @@
       return todo.due < today;
     }
 
+    function clearCompleted() {
+      const remaining = todos.filter(todo => !todo.completed);
+
+      todos.length = 0;
+      todos.push(...remaining);
+
+      renderTodos();
+    }
+
     function completeAll() {
       todos.forEach(todo => {
         todo.completed = true;
@@ -224,6 +233,7 @@
     sortButton.addEventListener("click", sortByDue);
 
     completeAllButton.addEventListener("click", completeAll);
+    clearCompletedButton.addEventListener("click", clearCompleted);
     todoInput.addEventListener("keydown", event => {
       if (event.key === "Enter") {
         addTodo();
