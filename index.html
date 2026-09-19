@@ -74,6 +74,10 @@
       font-size: 14px;
       color: #888;
     }
+
+    li .due.overdue {
+      color: #d92c2c;
+    }
   </style>
 </head>
 <body>
@@ -101,6 +105,15 @@
       { text: "给这期 Git 教程点赞", completed: true }
     ];
 
+    function isOverdue(todo) {
+      if (!todo.due || todo.completed) {
+        return false;
+      }
+
+      const today = new Date().toISOString().slice(0, 10);
+      return todo.due < today;
+    }
+
     function renderTodos() {
       todoList.innerHTML = "";
 
@@ -126,6 +139,10 @@
         const due = document.createElement("span");
         due.className = "due";
         due.textContent = todo.due ? todo.due : "";
+        if (isOverdue(todo)) {
+          due.classList.add("overdue");
+          due.textContent = todo.due + " 已过期";
+        }
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "删除";
