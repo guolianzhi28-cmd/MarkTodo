@@ -100,6 +100,7 @@
       <button id="sortButton">排序</button>
       <button id="completeAllButton">全部完成</button>
       <button id="clearCompletedButton">清空已完成</button>
+      <button id="exportButton">导出</button>
     </div>
 
     <ul id="todoList"></ul>
@@ -116,6 +117,7 @@
     const dueInput = document.getElementById("dueInput");
     const completeAllButton = document.getElementById("completeAllButton");
     const clearCompletedButton = document.getElementById("clearCompletedButton");
+    const exportButton = document.getElementById("exportButton");
 
     const todos = [
       { text: "关注「马克的技术工作坊」", completed: false },
@@ -138,6 +140,16 @@
       todos.push(...remaining);
 
       renderTodos();
+    }
+
+    function exportTodos() {
+      const lines = todos.map(todo => todo.text);
+
+      const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "马克待办.txt";
+      link.click();
     }
 
     function completeAll() {
@@ -243,6 +255,7 @@
 
     completeAllButton.addEventListener("click", completeAll);
     clearCompletedButton.addEventListener("click", clearCompleted);
+    exportButton.addEventListener("click", exportTodos);
     todoInput.addEventListener("keydown", event => {
       if (event.key === "Enter") {
         addTodo();
