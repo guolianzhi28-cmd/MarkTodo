@@ -6,7 +6,7 @@
   <title>马克待办</title>
   <style>
     body {
-      max-width: 640px;
+      max-width: 900px;
       margin: 60px auto;
       padding: 0 20px;
       background: #f7f7f7;
@@ -103,6 +103,7 @@
     </div>
 
     <ul id="todoList"></ul>
+    <p id="stats"></p>
   </div>
 
   <script>
@@ -110,6 +111,7 @@
     const addButton = document.getElementById("addButton");
     const todoList = document.getElementById("todoList");
     const sortButton = document.getElementById("sortButton");
+    const stats = document.getElementById("stats");
 
     const dueInput = document.getElementById("dueInput");
     const completeAllButton = document.getElementById("completeAllButton");
@@ -192,6 +194,9 @@
 
         todoList.appendChild(li);
       });
+
+      const left = todos.filter(todo => !todo.completed).length;
+      stats.textContent = `共 ${todos.length} 项，还剩 ${left} 项没完成`;
     }
 
     let sortAsc = true;
